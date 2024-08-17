@@ -1,6 +1,23 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
+import {  RouterModule,Routes, provideRouter } from '@angular/router';
 import { AppComponent } from './app/app.component';
+import { UserListComponent } from './app/user-list/user-list.component';
+import { UserDetailComponent } from './app/user-detail/user-detail.component';
+import { NgModule } from '@angular/core';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+const routes: Routes = [
+  { path: '', component: UserListComponent },
+  { path: 'user/:id', component: UserDetailComponent },
+];
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes),
+  
+  ],
+});
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
